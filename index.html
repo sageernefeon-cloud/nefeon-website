@@ -1,0 +1,2019 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>NEFEON — Digital Solutions</title>
+  <meta
+    name="description"
+    content="NEFEON creates modern digital experiences through web development, advertising and digital solutions."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --blue: #1769ff;
+      --blue-dark: #0754dc;
+      --blue-light: #eaf2ff;
+      --blue-soft: #f3f7ff;
+
+      --white: #ffffff;
+      --black: #07111f;
+      --text: #122033;
+      --muted: #64748b;
+      --border: #dfe8f5;
+
+      --radius-lg: 28px;
+      --radius-md: 18px;
+
+      --shadow: 0 20px 60px rgba(23, 105, 255, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* =========================================
+       BACKGROUND DOT SYSTEM
+    ========================================= */
+
+    .dot-background {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+
+      background-image:
+        radial-gradient(circle, rgba(23, 105, 255, 0.18) 1px, transparent 1px);
+      background-size: 26px 26px;
+
+      mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        rgba(0, 0, 0, 0.8) 45%,
+        transparent 100%
+      );
+    }
+
+    .dot-background::after {
+      content: "";
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      top: -250px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(
+        circle,
+        rgba(23, 105, 255, 0.16),
+        transparent 65%
+      );
+      filter: blur(30px);
+    }
+
+    /* =========================================
+       NAVIGATION
+    ========================================= */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 78px;
+      z-index: 1000;
+
+      display: flex;
+      align-items: center;
+
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid rgba(223, 232, 245, 0.7);
+
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 8px 30px rgba(8, 40, 90, 0.06);
+    }
+
+    .nav-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: var(--black);
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-links a {
+      position: relative;
+      font-size: 14px;
+      font-weight: 500;
+      color: #536174;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--blue);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: white !important;
+      box-shadow: 0 8px 25px rgba(23, 105, 255, 0.22);
+      transition: all 0.25s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      background: var(--blue-dark);
+      box-shadow: 0 12px 30px rgba(23, 105, 255, 0.28);
+    }
+
+    .nav-cta::after {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .mobile-menu span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin: 4px auto;
+      background: var(--black);
+      border-radius: 99px;
+    }
+
+    /* =========================================
+       HERO
+    ========================================= */
+
+    .hero {
+      position: relative;
+      min-height: 850px;
+      padding-top: 170px;
+      padding-bottom: 110px;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+      background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f8fbff 70%,
+        #ffffff 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      padding: 8px 13px;
+      border: 1px solid #d7e5ff;
+      border-radius: 999px;
+
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--blue);
+
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+
+      box-shadow: 0 8px 25px rgba(23, 105, 255, 0.06);
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 5px rgba(23, 105, 255, 0.1);
+    }
+
+    .hero h1 {
+      margin-top: 28px;
+
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(56px, 8vw, 108px);
+      line-height: 0.95;
+      letter-spacing: -0.075em;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .hero h1 .gradient {
+      background: linear-gradient(
+        100deg,
+        #0754dc 0%,
+        #1769ff 45%,
+        #53a0ff 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      margin: 30px auto 0;
+
+      font-size: 18px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .hero-buttons {
+      margin-top: 36px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      min-height: 52px;
+      padding: 0 23px;
+
+      border-radius: 999px;
+      border: 1px solid transparent;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .button-primary {
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 12px 30px rgba(23, 105, 255, 0.22);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-3px);
+      background: var(--blue-dark);
+      box-shadow: 0 18px 35px rgba(23, 105, 255, 0.3);
+    }
+
+    .button-secondary {
+      border-color: var(--border);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+    }
+
+    .button-secondary:hover {
+      transform: translateY(-3px);
+      border-color: #b8d0f8;
+      color: var(--blue);
+      box-shadow: var(--shadow);
+    }
+
+    .arrow {
+      transition: transform 0.25s ease;
+    }
+
+    .button:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    /* Floating visual */
+
+    .hero-orbit {
+      position: relative;
+      width: min(680px, 90vw);
+      height: 170px;
+      margin: 65px auto 0;
+    }
+
+    .orbit-line {
+      position: absolute;
+      inset: 20px 0;
+
+      border: 1px solid rgba(23, 105, 255, 0.14);
+      border-radius: 50%;
+
+      transform: perspective(500px) rotateX(62deg);
+    }
+
+    .orbit-line.two {
+      inset: 45px 80px;
+      border-color: rgba(23, 105, 255, 0.1);
+    }
+
+    .floating-pill {
+      position: absolute;
+
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      padding: 10px 15px;
+
+      border: 1px solid #dce8fa;
+      border-radius: 999px;
+
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 14px 35px rgba(24, 80, 150, 0.1);
+
+      font-size: 12px;
+      font-weight: 600;
+      color: #40516a;
+
+      animation: floating 5s ease-in-out infinite;
+    }
+
+    .floating-pill::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .pill-one {
+      left: 8%;
+      top: 20px;
+    }
+
+    .pill-two {
+      right: 8%;
+      top: 60px;
+      animation-delay: -1.5s;
+    }
+
+    .pill-three {
+      left: 38%;
+      bottom: 0;
+      animation-delay: -3s;
+    }
+
+    @keyframes floating {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* =========================================
+       CAPABILITY STRIP
+    ========================================= */
+
+    .capability-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: white;
+      overflow: hidden;
+    }
+
+    .capability-track {
+      min-height: 74px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 35px;
+
+      white-space: nowrap;
+
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #52637b;
+      text-transform: uppercase;
+    }
+
+    .capability-track span {
+      color: #bdd0eb;
+    }
+
+    /* =========================================
+       GENERAL SECTION
+    ========================================= */
+
+    section {
+      position: relative;
+    }
+
+    .section {
+      padding: 130px 0;
+    }
+
+    .section-heading {
+      max-width: 720px;
+    }
+
+    .section-label {
+      margin-bottom: 17px;
+
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .section-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.055em;
+      color: var(--black);
+    }
+
+    .section-description {
+      margin-top: 20px;
+
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    /* =========================================
+       SERVICES
+    ========================================= */
+
+    .services-section {
+      background: #ffffff;
+    }
+
+    .services-grid {
+      margin-top: 65px;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      position: relative;
+      min-height: 390px;
+
+      padding: 30px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+
+      background: white;
+      overflow: hidden;
+
+      transition:
+        transform 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -130px;
+      top: -130px;
+
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(23, 105, 255, 0.12),
+        transparent 70%
+      );
+
+      transition: transform 0.5s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-9px);
+      border-color: #b9d1f6;
+      box-shadow: var(--shadow);
+    }
+
+    .service-card:hover::before {
+      transform: scale(1.35);
+    }
+
+    .service-number {
+      position: relative;
+      z-index: 1;
+
+      width: 44px;
+      height: 44px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid #d8e6fb;
+      border-radius: 13px;
+
+      color: var(--blue);
+      background: var(--blue-soft);
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .service-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-content h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 27px;
+      letter-spacing: -0.04em;
+      color: var(--black);
+    }
+
+    .service-content p {
+      margin-top: 14px;
+
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .service-link {
+      position: relative;
+      z-index: 1;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      margin-top: 30px;
+
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* =========================================
+       CAPABILITIES
+    ========================================= */
+
+    .capabilities-section {
+      background: #f7faff;
+    }
+
+    .capability-list {
+      margin-top: 70px;
+      border-top: 1px solid var(--border);
+    }
+
+    .capability-item {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr;
+      gap: 30px;
+
+      padding: 30px 0;
+
+      border-bottom: 1px solid var(--border);
+
+      transition: padding 0.35s ease;
+    }
+
+    .capability-item:hover {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .capability-index {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .capability-item h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 26px;
+      letter-spacing: -0.035em;
+      color: var(--black);
+    }
+
+    .capability-item p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    /* =========================================
+       ABOUT
+    ========================================= */
+
+    .about-section {
+      background: white;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-statement {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+      color: var(--black);
+    }
+
+    .about-statement span {
+      color: var(--blue);
+    }
+
+    .about-copy {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .about-copy + .about-copy {
+      margin-top: 20px;
+    }
+
+    /* =========================================
+       APPROACH
+    ========================================= */
+
+    .approach-section {
+      background: #f7faff;
+    }
+
+    .approach-grid {
+      margin-top: 65px;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .approach-card {
+      padding: 34px;
+
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: white;
+
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .approach-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+
+    .approach-card-number {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .approach-card h3 {
+      margin-top: 40px;
+
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 27px;
+      letter-spacing: -0.04em;
+    }
+
+    .approach-card p {
+      margin-top: 13px;
+
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    /* =========================================
+       CTA
+    ========================================= */
+
+    .cta-section {
+      padding: 140px 0;
+      background: white;
+    }
+
+    .cta-box {
+      position: relative;
+      overflow: hidden;
+
+      padding: 90px 50px;
+
+      text-align: center;
+
+      border-radius: 34px;
+
+      background:
+        radial-gradient(
+          circle at 20% 30%,
+          rgba(83, 160, 255, 0.24),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(7, 84, 220, 0.28),
+          transparent 35%
+        ),
+        linear-gradient(135deg, #0754dc, #1769ff);
+
+      color: white;
+      box-shadow: 0 35px 80px rgba(23, 105, 255, 0.2);
+    }
+
+    .cta-box::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+      background-size: 24px 24px;
+
+      mask-image: linear-gradient(
+        135deg,
+        transparent,
+        black 35%,
+        black 65%,
+        transparent
+      );
+
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-box h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .cta-box p {
+      max-width: 550px;
+      margin: 22px auto 0;
+
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.7;
+    }
+
+    .cta-button {
+      margin-top: 32px;
+
+      background: white;
+      color: var(--blue);
+
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      background: #f4f8ff;
+    }
+
+    /* =========================================
+       CONTACT
+    ========================================= */
+
+    .contact-section {
+      background: #f7faff;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 48px;
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+    }
+
+    .contact-info p {
+      margin-top: 20px;
+
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .contact-form {
+      padding: 30px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+
+      background: white;
+      box-shadow: 0 15px 50px rgba(30, 75, 140, 0.06);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+
+      font-size: 12px;
+      font-weight: 700;
+      color: #44536a;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+
+      border: 1px solid var(--border);
+      border-radius: 13px;
+
+      background: #fbfdff;
+      color: var(--black);
+
+      outline: none;
+
+      transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .form-group input {
+      height: 50px;
+      padding: 0 15px;
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      padding: 14px 15px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #8bb3f3;
+      box-shadow: 0 0 0 4px rgba(23, 105, 255, 0.08);
+      background: white;
+    }
+
+    .form-submit {
+      width: 100%;
+      border: 0;
+    }
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    footer {
+      padding: 35px 0;
+
+      border-top: 1px solid var(--border);
+      background: white;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .footer-brand span {
+      color: var(--blue);
+    }
+
+    .footer-copy {
+      color: #8290a4;
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover {
+      color: var(--blue);
+    }
+
+    /* =========================================
+       REVEAL ANIMATIONS
+    ========================================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 900px) {
+      .nav-links {
+        position: fixed;
+        top: 78px;
+        left: 20px;
+        right: 20px;
+
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+
+        padding: 12px;
+
+        border: 1px solid var(--border);
+        border-radius: 18px;
+
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(20px);
+
+        box-shadow: 0 20px 60px rgba(20, 60, 120, 0.12);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 13px;
+      }
+
+      .nav-cta {
+        text-align: center;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .services-grid,
+      .approach-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .capability-item {
+        grid-template-columns: 50px 1fr;
+      }
+
+      .capability-item p {
+        grid-column: 2;
+      }
+
+      .contact-info h2 {
+        font-size: 40px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 145px;
+      }
+
+      .hero-orbit {
+        margin-top: 45px;
+      }
+
+      .pill-one {
+        left: 0;
+      }
+
+      .pill-two {
+        right: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container,
+      .nav-inner {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .hero {
+        padding-bottom: 80px;
+      }
+
+      .hero h1 {
+        font-size: clamp(50px, 16vw, 76px);
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .section {
+        padding: 90px 0;
+      }
+
+      .services-grid,
+      .approach-grid {
+        margin-top: 45px;
+      }
+
+      .service-card {
+        min-height: 330px;
+      }
+
+      .capability-track {
+        justify-content: flex-start;
+        overflow: hidden;
+        gap: 20px;
+        font-size: 10px;
+      }
+
+      .capability-item {
+        gap: 15px;
+      }
+
+      .capability-item h3 {
+        font-size: 22px;
+      }
+
+      .cta-section {
+        padding: 90px 0;
+      }
+
+      .cta-box {
+        padding: 65px 24px;
+        border-radius: 25px;
+      }
+
+      .contact-form {
+        padding: 20px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+
+      .floating-pill {
+        font-size: 10px;
+        padding: 8px 11px;
+      }
+
+      .pill-three {
+        left: 32%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================
+       NAVIGATION
+  ========================================== -->
+
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+
+      <a href="#home" class="logo">
+        NEFEON<span>.</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#approach">Approach</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-cta">Let's Talk</a>
+      </nav>
+
+      <button
+        class="mobile-menu"
+        id="mobileMenu"
+        aria-label="Open navigation"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- =========================================
+       HERO
+  ========================================== -->
+
+  <main>
+
+    <section class="hero" id="home">
+
+      <div class="dot-background"></div>
+
+      <div class="container">
+
+        <div class="hero-content reveal">
+
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Digital solutions
+          </div>
+
+          <h1>
+            Digital
+            <br />
+            <span class="gradient">experiences.</span>
+          </h1>
+
+          <p class="hero-description">
+            NEFEON creates modern websites, advertising solutions and
+            digital experiences designed for businesses in a connected world.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#services" class="button button-primary">
+              Explore services
+              <span class="arrow">→</span>
+            </a>
+
+            <a href="#contact" class="button button-secondary">
+              Let's talk
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+
+          <div class="hero-orbit">
+
+            <div class="orbit-line"></div>
+            <div class="orbit-line two"></div>
+
+            <div class="floating-pill pill-one">
+              Web Development
+            </div>
+
+            <div class="floating-pill pill-two">
+              Advertising
+            </div>
+
+            <div class="floating-pill pill-three">
+              Digital Solutions
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         CAPABILITY STRIP
+    ========================================== -->
+
+    <div class="capability-strip">
+      <div class="capability-track">
+        <span>✦</span>
+        Web Development
+        <span>✦</span>
+        Advertising
+        <span>✦</span>
+        Digital Solutions
+        <span>✦</span>
+        Creative Technology
+        <span>✦</span>
+        Web Development
+        <span>✦</span>
+      </div>
+    </div>
+
+
+    <!-- =========================================
+         SERVICES
+    ========================================== -->
+
+    <section class="section services-section" id="services">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <div class="section-label">
+            What we do
+          </div>
+
+          <h2 class="section-title">
+            Digital services
+            <br />
+            built to move forward.
+          </h2>
+
+          <p class="section-description">
+            From websites to advertising and digital solutions,
+            NEFEON focuses on creating practical and modern
+            experiences for today's businesses.
+          </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+          <article class="service-card reveal">
+
+            <div class="service-number">01</div>
+
+            <div class="service-content">
+
+              <h3>Web Development</h3>
+
+              <p>
+                Modern websites and web solutions built with
+                clean interfaces, responsive experiences and
+                practical functionality.
+              </p>
+
+              <a href="#contact" class="service-link">
+                Discuss a project
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <article class="service-card reveal">
+
+            <div class="service-number">02</div>
+
+            <div class="service-content">
+
+              <h3>Advertising</h3>
+
+              <p>
+                Digital advertising and promotional solutions
+                designed to help businesses communicate with
+                their audience online.
+              </p>
+
+              <a href="#contact" class="service-link">
+                Discuss a project
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <article class="service-card reveal">
+
+            <div class="service-number">03</div>
+
+            <div class="service-content">
+
+              <h3>Digital Solutions</h3>
+
+              <p>
+                Practical digital and creative solutions that
+                combine technology, design and business needs
+                into useful experiences.
+              </p>
+
+              <a href="#contact" class="service-link">
+                Discuss a project
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         CAPABILITIES
+    ========================================== -->
+
+    <section class="section capabilities-section">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <div class="section-label">
+            Capabilities
+          </div>
+
+          <h2 class="section-title">
+            Built for the
+            <br />
+            digital world.
+          </h2>
+
+        </div>
+
+
+        <div class="capability-list">
+
+          <div class="capability-item reveal">
+
+            <div class="capability-index">
+              01
+            </div>
+
+            <h3>Web Experiences</h3>
+
+            <p>
+              Responsive digital experiences designed to
+              look clean, feel intuitive and work across
+              modern devices.
+            </p>
+
+          </div>
+
+
+          <div class="capability-item reveal">
+
+            <div class="capability-index">
+              02
+            </div>
+
+            <h3>Digital Presence</h3>
+
+            <p>
+              Helping businesses create a clear and
+              professional presence across digital
+              touchpoints.
+            </p>
+
+          </div>
+
+
+          <div class="capability-item reveal">
+
+            <div class="capability-index">
+              03
+            </div>
+
+            <h3>Advertising</h3>
+
+            <p>
+              Digital promotional solutions that help
+              businesses communicate their message
+              effectively.
+            </p>
+
+          </div>
+
+
+          <div class="capability-item reveal">
+
+            <div class="capability-index">
+              04
+            </div>
+
+            <h3>Creative Technology</h3>
+
+            <p>
+              Bringing together design, technology and
+              creative thinking to create useful digital
+              solutions.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         ABOUT
+    ========================================== -->
+
+    <section class="section about-section" id="about">
+
+      <div class="container">
+
+        <div class="about-grid">
+
+          <div class="reveal">
+
+            <div class="section-label">
+              About NEFEON
+            </div>
+
+            <h2 class="about-statement">
+              Digital solutions
+              <span>made simple.</span>
+            </h2>
+
+          </div>
+
+
+          <div class="reveal">
+
+            <p class="about-copy">
+              NEFEON focuses on web development, advertising
+              and digital solutions for businesses looking to
+              build and improve their digital presence.
+            </p>
+
+            <p class="about-copy">
+              We combine technology, design and practical
+              thinking to create digital experiences that
+              are clear, useful and built for the modern web.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         APPROACH
+    ========================================== -->
+
+    <section class="section approach-section" id="approach">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <div class="section-label">
+            Our approach
+          </div>
+
+          <h2 class="section-title">
+            From idea
+            <br />
+            to experience.
+          </h2>
+
+        </div>
+
+
+        <div class="approach-grid">
+
+          <article class="approach-card reveal">
+
+            <div class="approach-card-number">
+              01 / UNDERSTAND
+            </div>
+
+            <h3>Understand</h3>
+
+            <p>
+              Start with the business, the audience and
+              the actual problem that needs solving.
+            </p>
+
+          </article>
+
+
+          <article class="approach-card reveal">
+
+            <div class="approach-card-number">
+              02 / BUILD
+            </div>
+
+            <h3>Build</h3>
+
+            <p>
+              Turn ideas and requirements into clean,
+              functional and thoughtful digital solutions.
+            </p>
+
+          </article>
+
+
+          <article class="approach-card reveal">
+
+            <div class="approach-card-number">
+              03 / REFINE
+            </div>
+
+            <h3>Refine</h3>
+
+            <p>
+              Improve the details, interactions and
+              overall experience until everything feels right.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         CTA
+    ========================================== -->
+
+    <section class="cta-section">
+
+      <div class="container">
+
+        <div class="cta-box reveal">
+
+          <div class="cta-content">
+
+            <h2>
+              Have something
+              <br />
+              in mind?
+            </h2>
+
+            <p>
+              Let's turn your idea into a digital experience.
+            </p>
+
+            <a href="#contact" class="button cta-button">
+              Start a conversation
+              <span class="arrow">→</span>
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         CONTACT
+    ========================================== -->
+
+    <section class="section contact-section" id="contact">
+
+      <div class="container">
+
+        <div class="contact-grid">
+
+          <div class="contact-info reveal">
+
+            <div class="section-label">
+              Contact
+            </div>
+
+            <h2>
+              Let's build
+              something
+              digital.
+            </h2>
+
+            <p>
+              Have a website, advertising or digital project
+              in mind? Send us a message and tell us what
+              you're looking to build.
+            </p>
+
+          </div>
+
+
+          <form
+            class="contact-form reveal"
+            id="contactForm"
+          >
+
+            <div class="form-group">
+
+              <label for="name">
+                Name
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your name"
+                required
+              />
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="email">
+                Email
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+              />
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="service">
+                What can we help with?
+              </label>
+
+              <input
+                type="text"
+                id="service"
+                name="service"
+                placeholder="Web development, advertising..."
+              />
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="message">
+                Message
+              </label>
+
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell us about your project..."
+                required
+              ></textarea>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="button button-primary form-submit"
+            >
+              Send message
+              <span class="arrow">→</span>
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-inner">
+
+        <div class="footer-brand">
+          NEFEON<span>.</span>
+        </div>
+
+        <div class="footer-copy">
+          © <span id="year"></span> NEFEON. All rights reserved.
+        </div>
+
+        <div class="footer-links">
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================== -->
+
+  <script>
+
+    /* -------------------------------
+       NAVBAR SCROLL EFFECT
+    -------------------------------- */
+
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 20) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+
+    });
+
+
+    /* -------------------------------
+       MOBILE MENU
+    -------------------------------- */
+
+    const mobileMenu = document.getElementById("mobileMenu");
+    const navLinks = document.getElementById("navLinks");
+
+    mobileMenu.addEventListener("click", () => {
+
+      const isOpen = navLinks.classList.toggle("active");
+
+      mobileMenu.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+    });
+
+
+    /* Close mobile menu after clicking */
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        navLinks.classList.remove("active");
+
+        mobileMenu.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      });
+
+    });
+
+
+    /* -------------------------------
+       SCROLL REVEAL
+    -------------------------------- */
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+              revealObserver.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+
+    revealElements.forEach((element) => {
+
+      revealObserver.observe(element);
+
+    });
+
+
+    /* -------------------------------
+       CONTACT FORM
+    -------------------------------- */
+
+    const contactForm =
+      document.getElementById("contactForm");
+
+    contactForm.addEventListener("submit", (event) => {
+
+      event.preventDefault();
+
+      const button =
+        contactForm.querySelector("button");
+
+      const originalText =
+        button.innerHTML;
+
+      button.innerHTML =
+        "Message prepared ✓";
+
+      button.style.background =
+        "#0b7a4b";
+
+      setTimeout(() => {
+
+        button.innerHTML =
+          originalText;
+
+        button.style.background =
+          "";
+
+      }, 2500);
+
+    });
+
+
+    /* -------------------------------
+       CURRENT YEAR
+    -------------------------------- */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+  </script>
+
+</body>
+</html>
